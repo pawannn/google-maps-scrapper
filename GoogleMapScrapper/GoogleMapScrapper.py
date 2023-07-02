@@ -2,13 +2,14 @@ from selenium import webdriver
 import pandas as pd
 import time
 
-def scrape(url, amount, filename):
+def scrape(keyword, DataSize):
+    url = "https://www.google.com/maps/search/"+keyword.replace(" ", "+")+"/"
     driver = webdriver.Chrome()
     driver.get(url)
 
-    if(amount > 6):
+    if(DataSize > 6):
         print('Loading please wait...')
-        scroll = (amount % 7) + 20
+        scroll = (DataSize % 7) + 20
         i = 1
         while(i < scroll):
             try:
@@ -42,8 +43,8 @@ def scrape(url, amount, filename):
 
     for card in cards_xpath:
         isClicked = False
-        print("progressing : {} / {}".format(i, amount))
-        if(i == amount+1):
+        print("progressing : {} / {}".format(i, DataSize))
+        if(i == DataSize+1):
             print("Saving data...")
             break
 
@@ -104,13 +105,5 @@ def scrape(url, amount, filename):
             i += 1
 
     df = pd.DataFrame({"Name" : cafe_name, "rating" : cafe_rating, "reviews" : cafe_reviews, "Address" : cafe_address, "phone" : cafe_phone, 'url': cafe_urls})
-    filename = "_".join(filename.split(" ")) + ".csv"
     df.to_csv('data.csv', index = False)
     return
-
-if __name__ == "__main__":
-    keyword = "cafe in hyderabad"
-
-    website = "https://www.google.com/maps/search/"+keyword.replace(" ", '+')+"/"
-    data_size = 100
-    scrape(website, data_size, keyword)
