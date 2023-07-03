@@ -24,10 +24,10 @@ if __name__ == "__main__":
 ```
 
 - You can change the `search` vairable string as per your search.
-- The `dataSize` refresh to the amount of data that you need, You can change as per your need.
+- The `dataSize` refers to the amount of data that you need, You can change as per your need.
 
 - Run the program using the command `python main.py`
 - The Chromedriver will open up automated and You may see the progress in the terminal.
-- After the program is completed, You may view your result in the ".csv" file.
+- After the program is completed, You can view scraped data in the ".csv" file.
 
 Thank You
